@@ -1,3 +1,0 @@
-master
-second
-initial commit on test_merge
