@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 根节点，不进行定时扫描 -->
+<configuration scan="false">
+       <property name="appName" value="leeDemo"/>
+       <property name="filePrefix" value="/Users/lee/workspace/github/leeDemo/logs"></property>
+       <!-- 上下文名字 -->
+       <contextName>${appName}</contextName>
+       <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+              <encoder>
+                     <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] [%msg]%n</pattern>
+              </encoder>
+       </appender>
+
+       <appender name="daily-info-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+              <file>${filePrefix}/leeDemo-info.log</file>
+              <!-- 追加 -->
+              <append>true</append>
+              <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                     <level>INFO</level>
+              </filter>
+              <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                     <fileNamePattern>${filePrefix}/leeDemo-info.%d{yyyyMMdd}.log.zip</fileNamePattern>
+              </rollingPolicy>
+              <!-- 日志格式化 -->
+              <encoder>
+                     <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] [%msg]%n</pattern>
+              </encoder>
+       </appender>
+
+
+       <appender name="daily-error-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+              <file>${filePrefix}/leeDemo-error.log</file>
+              <!-- 追加 -->
+              <append>true</append>
+              <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                     <level>ERROR</level>
+              </filter>
+              <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                     <fileNamePattern>${filePrefix}/leeDemo-error.%d{yyyyMMdd}.log.zip</fileNamePattern>
+              </rollingPolicy>
+              <!-- 日志格式化 -->
+              <encoder>
+                     <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%-5level] [%msg]%n</pattern>
+              </encoder>
+       </appender>
+
+
+       <!-- project default level -->
+       <logger name="com.google.code.yanf4j.core.impl" level="INFO" />
+       <logger name="net.rubyeye.xmemcached.impl" level="INFO" />
+       <logger name="org.springframework" level="INFO" />
+       <root level="DEBUG">
+              <appender-ref ref="console" />
+              <appender-ref ref="daily-info-log" />
+              <appender-ref ref="daily-error-log" />
+       </root>
+</configuration>
