@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
         @RequestParam(value = "message", required = false) String message,
         HttpServletResponse response) {
         System.out.println(message);
+        System.out.printf("qwe");
     }
 
 }
